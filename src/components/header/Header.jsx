@@ -8,13 +8,13 @@ export const Header = () => {
   };
 
   return (
-    <header className="flex justify-between bg-white">
+    <header className="flex justify-between bg-white h-16">
       <button
         href=""
         onClick={toggleDropdown}
-        className="flex m-4 hover:bg-gray py-4 pl-4 pr-4 rounded-xl"
+        className="flex hover:bg-gray py-4 pl-4 pr-4 rounded-xl"
       >
-        <h1 className="font-bold text-2xl text-textsecond">ChatGPT</h1>
+        <h1 className="font-bold text-xl text-textsecond">ChatGPT</h1>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -130,10 +130,10 @@ export const Header = () => {
         </ul>
       )}
       <ul className="flex justify-center align-center items-center gap-4 mr-8">
-        <li className="border border-2 border-hvrtxtscnd bg-hvrblk text-white p-4 rounded-[50px] w-[8rem] flex justify-center cursor-pointer">
+        <li className="border border-2 border-hvrtxtscnd bg-hvrblk text-white p-2 rounded-[50px] w-20 sm:w-[6rem] lg:w-[8rem] flex justify-center cursor-pointer">
           <a href="login">Log in</a>
         </li>
-        <li className="border border-2 border-hvrblk bg-white p-4 rounded-[50px] w-[8rem] flex justify-center cursor-pointer">
+        <li className="border border-2 border-hvrblk bg-white p-2 rounded-[50px] w-20 sm:w-[6rem] lg:w-[8rem] flex justify-center cursor-pointer">
           <a href="signup">Sign up</a>
         </li>
       </ul>

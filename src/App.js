@@ -32,7 +32,6 @@ function App() {
         <div className="w-72">
           <Sidebar />
         </div>
-
         <div className="flex-1 w-full table-cell bg-blue">
           {/* <form
           onSubmit={handleSubmit}
