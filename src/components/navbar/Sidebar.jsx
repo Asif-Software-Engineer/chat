@@ -29,7 +29,6 @@ const Sidebar = () => {
             ></path>
           </svg>
         </button>
-        {/* <span className="flex"> */}
         <button
           className="h-10 rounded-lg px-2 text-textsecond focus-visible:outline-0 hover:bg-hvrtxtscnd focus-visible:bg-hvrtxtscnd"
           title="Close Sidebar"
@@ -49,7 +48,6 @@ const Sidebar = () => {
             ></path>
           </svg>
         </button>
-        {/* </span> */}
         <button
           className="h-10 rounded-lg px-2 text-textsecond focus-visible:outline-0 hover:bg-hvrtxtscnd focus-visible:bg-hvrtxtscnd"
           title="New Chat"

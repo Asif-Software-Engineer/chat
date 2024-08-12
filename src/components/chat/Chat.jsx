@@ -58,15 +58,15 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col w-full justify-center align-center bg-white shadow-lg rounded-lg overflow-hidden" style={{ height: "80vh" }}>
+    <div className="flex flex-col w-full justify-center align-center bg-white shadow-lg rounded-lg overflow-hidden" style={{ height: "91.5vh" }}>
       <div className="flex-1 p-4 overflow-y-auto" style={{ height: "300px" }}>
         {messages.map((message, index) => (
           <div
             key={index}
             className={`my-2 py-2 px-4 rounded-lg ${
               message.sender === "bot"
-                ? "bg-gray"
-                : "bg-hvrblk text-white self-end"
+                ? "bg-gray mx-10 lg:mx-40 md:mx-20"
+                : "bg-hvrblk text-white self-end mx-10 lg:mx-40 md:mx-20"
             }`}
           >
             {message.text}
