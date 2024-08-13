@@ -128,23 +128,15 @@ import { useNavigate, Link } from "react-router-dom";
 export const SignUp = () => {
   const navigate = useNavigate();
   const [input, setInput] = useState({
+    name: "",
     email: "",
     password: "",
   });
 
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const loggeduser = JSON.parse(localStorage.getItem("user"));
-    if (
-      loggeduser &&
-      input.email === loggeduser.email &&
-      input.password === loggeduser.password
-    ) {
-      localStorage.setItem("loggedin", true);
-      navigate("/");
-    } else {
-      alert("Wrong Email or Password");
-    }
+    localStorage.setItem("user", JSON.stringify(input));
+    navigate("/login");
   };
 
   return (
@@ -159,7 +151,7 @@ export const SignUp = () => {
           Create your Account
         </div>
       </div>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-y-8">
           <div className="flex flex-col items-center">
             <input
@@ -177,6 +169,21 @@ export const SignUp = () => {
             />
           </div>
         </div>
+        <div className="flex flex-col items-center mt-4">
+            <input
+              name="name"
+              value={input.name}
+              onChange={(e) =>
+                setInput({
+                  ...input,
+                  [e.target.name]: e.target.value,
+                })
+              }
+              type="text"
+              className="w-[320px] h-12 bg-white border border-hvrtxtscnd focus:border-green rounded-xl p-4"
+              placeholder="enter your username here"
+            />
+          </div>
         <div className="flex flex-col items-center mt-4">
           <input
             name="password"
