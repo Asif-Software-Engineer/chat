@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import axios from "axios";
-import Sidebar from "./components/navbar/Sidebar";
 import Chat from "./components/chat/Chat";
 import { Login } from "./components/header/Login";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { Header } from "./components/header/Header";
 import { SignUp } from "./components/header/SignUp";
+import ProfileMenu from "./components/header/ProfileMenu";
 
 function App() {
   const [sidebarWidth, setSidebarWidth] = useState("max-w-72");
   const [mainWidth, setMainWidth] = useState("w-full");
   const [isHovered, setIsHovered] = useState(false);
   const [open, setOpen] = useState(true);
+  const [ loging, setLoging] = useState(false);
+  const navigate = useNavigate();
   // const [message, setMessage] = useState("");
   // const [response, setResponse] = useState("");
 
@@ -35,9 +37,25 @@ function App() {
     setMainWidth(open ? "ml-20" : "ml-0");
     setOpen(!open);
   };
+// login & profile buttons show and hide
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setLoging(true);
+    }
+  }, []);
+  // const handleLogin = () => {
+  //   localStorage.setItem('authToken', 'your-auth-token');
+  //   setLoging(true);
+  //   navigate('/profile');
+  // };
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    setLoging(false);
+    navigate('/login');
+  };
 
   return (
-    <BrowserRouter>
       <div className="flex">
         <div className={`${sidebarWidth} bg-gray`}>
           <div
@@ -45,7 +63,7 @@ function App() {
               ${open ? "w-60" : "w-20 bg-white"} 
               bg-gray`}
           >
-            <div className="flex justify-between p-4">
+            <div className="sidebar flex justify-between p-4">
               {/* <button className="p-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -156,7 +174,6 @@ function App() {
               )}
             </div>
           </div>
-          {/* <Sidebar /> */}
         </div>
         <div className={`${mainWidth} w-full table-cell bg-blue`}>
           {/* <form
@@ -174,16 +191,16 @@ function App() {
           </button>
         </form>
         <div>{response}</div> */}
-          <Header />
+          <Header loging={loging} handleLogout={handleLogout} />
           <Routes>
             <Route path="/" element={<Chat />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/profile" element={<ProfileMenu/>} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>
       </div>
-    </BrowserRouter>
   );
 }
 
