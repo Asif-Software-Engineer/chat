@@ -18,9 +18,11 @@ const ProfileMenu = ({ handleLogout }) => {
     };
   }, []);
 
-  // const toggleMenu = () => {
-  //   setOpen(!open);
-  // }
+  const handleLogoutClick = () => {
+    handleLogout();
+    setOpen(false);
+    window.location.reload();
+  }
 
   return (
     <div className="relative" ref={menuRef}>
@@ -124,11 +126,7 @@ const ProfileMenu = ({ handleLogout }) => {
             className="mx-5 my-1 h-px bg-textsecond"
           ></div>
           <button
-            // onClick={() => {
-            //   handleLogout();
-            // setOpen(false);
-            // }}
-            onClick={handleLogout}
+            onClick={handleLogoutClick}
             className="block w-full text-left p-4 text-sm hover:bg-gray rounded-lg"
           >
             <div className="flex">
