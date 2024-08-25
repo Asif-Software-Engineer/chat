@@ -1,14 +1,32 @@
-import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 const ProfileMenu = ({ handleLogout }) => {
   const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  const handleOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+    };
+  }, []);
+
+  // const toggleMenu = () => {
+  //   setOpen(!open);
+  // }
 
   return (
-    <div className="relative">
+    <div className="relative" ref={menuRef}>
       <button
         className="flex items-center space-x-2 px-8 py-4"
-        href="profile"
+        // href="profile"
         onClick={() => setOpen(!open)}
       >
         <img
@@ -18,21 +36,20 @@ const ProfileMenu = ({ handleLogout }) => {
         />
         <span className="text-sm text-textsecond font-medium">User Name</span>
       </button>
-
       {open && (
         <div className="absolute right-0 m-2 w-[22rem] bg-white text-textsecond shadow-full font-semibold rounded-xl shadow-lg p-2">
           <a
             href="/profile"
             className="block p-4 text-sm hover:bg-gray rounded-lg"
           >
-            <div class="flex">
+            <div className="flex">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
                 fill="none"
                 viewBox="0 0 24 24"
-                class="h-5 w-5 shrink-0 "
+                className="h-5 w-5 shrink-0 "
               >
                 <path
                   fill="currentColor"
@@ -57,7 +74,7 @@ const ProfileMenu = ({ handleLogout }) => {
                 height="24"
                 fill="none"
                 viewBox="0 0 24 24"
-                class="h-5 w-5 shrink-0"
+                className="h-5 w-5 shrink-0"
               >
                 <path
                   fill="currentColor"
@@ -82,19 +99,15 @@ const ProfileMenu = ({ handleLogout }) => {
                 height="24"
                 fill="none"
                 viewBox="0 0 24 24"
-                class="h-5 w-5 shrink-0"
+                className="h-5 w-5 shrink-0"
               >
                 <path
                   fill="currentColor"
-                  fill-rule="evenodd"
                   d="M11.568 3.5a1 1 0 0 0-.863.494l-.811 1.381A3 3 0 0 1 7.33 6.856l-1.596.013a1 1 0 0 0-.858.501l-.44.761a1 1 0 0 0-.003.992l.792 1.4a3 3 0 0 1 0 2.954l-.792 1.4a1 1 0 0 0 .004.992l.439.76a1 1 0 0 0 .858.502l1.596.013a3 3 0 0 1 2.564 1.48l.811 1.382a1 1 0 0 0 .863.494h.87a1 1 0 0 0 .862-.494l.812-1.381a3 3 0 0 1 2.563-1.481l1.596-.013a1 1 0 0 0 .859-.501l.439-.761a1 1 0 0 0 .004-.992l-.793-1.4a3 3 0 0 1 0-2.953l.793-1.401a1 1 0 0 0-.004-.992l-.439-.76a1 1 0 0 0-.859-.502l-1.596-.013a3 3 0 0 1-2.563-1.48L13.3 3.993a1 1 0 0 0-.862-.494zM8.98 2.981A3 3 0 0 1 11.568 1.5h.87a3 3 0 0 1 2.588 1.481l.81 1.382a1 1 0 0 0 .855.494l1.597.013a3 3 0 0 1 2.575 1.502l.44.76a3 3 0 0 1 .011 2.975l-.792 1.4a1 1 0 0 0 0 .985l.792 1.401a3 3 0 0 1-.012 2.974l-.439.761a3 3 0 0 1-2.575 1.503l-1.597.012a1 1 0 0 0-.854.494l-.811 1.382a3 3 0 0 1-2.588 1.481h-.87a3 3 0 0 1-2.588-1.481l-.811-1.382a1 1 0 0 0-.855-.494l-1.596-.012a3 3 0 0 1-2.576-1.503l-.439-.76a3 3 0 0 1-.012-2.975l.793-1.4a1 1 0 0 0 0-.985l-.793-1.4a3 3 0 0 1 .012-2.975l.44-.761A3 3 0 0 1 5.717 4.87l1.596-.013a1 1 0 0 0 .855-.494z"
-                  clip-rule="evenodd"
                 ></path>
                 <path
                   fill="currentColor"
-                  fill-rule="evenodd"
                   d="M12.003 10.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M8.502 12a3.5 3.5 0 1 1 7 .001 3.5 3.5 0 0 1-7-.001"
-                  clip-rule="evenodd"
                 ></path>
               </svg>
               <p className="w-full pl-4">Settings</p>
@@ -111,6 +124,10 @@ const ProfileMenu = ({ handleLogout }) => {
             className="mx-5 my-1 h-px bg-textsecond"
           ></div>
           <button
+            // onClick={() => {
+            //   handleLogout();
+            // setOpen(false);
+            // }}
             onClick={handleLogout}
             className="block w-full text-left p-4 text-sm hover:bg-gray rounded-lg"
           >
@@ -121,7 +138,7 @@ const ProfileMenu = ({ handleLogout }) => {
                 height="24"
                 fill="none"
                 viewBox="0 0 24 24"
-                class="h-5 w-5 shrink-0"
+                className="h-5 w-5 shrink-0"
               >
                 <path
                   fill="currentColor"

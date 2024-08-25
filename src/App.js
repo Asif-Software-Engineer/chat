@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // import axios from "axios";
 import Chat from "./components/chat/Chat";
 import { Login } from "./components/header/Login";
-import { BrowserRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { Header } from "./components/header/Header";
 import { SignUp } from "./components/header/SignUp";
 import ProfileMenu from "./components/header/ProfileMenu";
@@ -12,7 +12,9 @@ function App() {
   const [mainWidth, setMainWidth] = useState("w-full");
   const [isHovered, setIsHovered] = useState(false);
   const [open, setOpen] = useState(true);
-  const [ loging, setLoging] = useState(false);
+  const [ loging, setLoging] = useState(() => {
+    return localStorage.getItem('authToken') !== null;
+  });
   const navigate = useNavigate();
   // const [message, setMessage] = useState("");
   // const [response, setResponse] = useState("");
@@ -38,12 +40,16 @@ function App() {
     setOpen(!open);
   };
 // login & profile buttons show and hide
-  useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      setLoging(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('authToken');
+  //   console.log('Token:', token)
+  //   if (token) {
+  //     setLoging(true);
+  //     console.log('user is logged in');
+  //   } else {
+  //     console.log('user is not logged in');
+  //   }
+  // }, []);
   // const handleLogin = () => {
   //   localStorage.setItem('authToken', 'your-auth-token');
   //   setLoging(true);

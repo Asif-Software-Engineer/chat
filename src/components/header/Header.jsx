@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import ProfileMenu from "./ProfileMenu";
+import { Link } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 
 export const Header = ({ loging, handleLogout }) => {
+  const { isAuthenticated, user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -130,15 +133,15 @@ export const Header = ({ loging, handleLogout }) => {
           </li>
         </ul>
       )}
-      {!loging ? (
+      {isAuthenticated ? (
         <ProfileMenu handleLogout={handleLogout} />
       ) : (
         <ul className="flex justify-center align-center items-center gap-4 mr-8">
           <li className="border border-2 border-hvrtxtscnd bg-hvrblk text-white p-2 rounded-[50px] w-20 sm:w-[6rem] lg:w-[8rem] flex justify-center cursor-pointer">
-            <a href="login">Log in</a>
+            <Link to="login">Log in</Link>
           </li>
           <li className="border border-2 border-hvrblk bg-white p-2 rounded-[50px] w-20 sm:w-[6rem] lg:w-[8rem] flex justify-center cursor-pointer">
-            <a href="signup">Sign up</a>
+            <Link to="signup">Sign up</Link>
           </li>
         </ul>
       )}

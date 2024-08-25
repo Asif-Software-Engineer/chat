@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 
 export const Login = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [input, setInput] = useState({
     email: "",
@@ -10,12 +12,13 @@ export const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const loggeduser = JSON.parse(localStorage.getItem("user"));
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
     if (
-      input.email === loggeduser.email &&
-      input.password === loggeduser.password
+      input.email === storedUser.email &&
+      input.password === storedUser.password
     ) {
-      localStorage.setItem("loggedin", true);
+      login(storedUser);
       navigate("/");
     } else {
       alert("wrong Email or Password");
